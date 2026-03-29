@@ -1,0 +1,30 @@
+services:
+  # Backend API
+  - type: web
+    name: toonmap-api
+    runtime: python
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 main.py
+    envVars:
+      - key: MAP_BOX_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: HF_TOKEN
+        sync: false
+      - key: PORT
+        value: 8000
+      - key: DEBUG
+        value: False
+    
+  # Frontend Static Site
+  - type: web
+    name: toonmap-frontend
+    runtime: static
+    branch: main
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://toonmap.onrender.com
