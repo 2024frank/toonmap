@@ -63,7 +63,7 @@ const LANDMARK_ICONS: Record<string, string> = {
   default: '📍',
 };
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://toonmap.onrender.com';
 
 interface VerifiedLocation {
   place_name: string;
